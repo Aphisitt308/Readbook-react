@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Profile from "../../components/user/profile";
-import {getProfileByID} from "../../actions/profileAction"
+import {getProfile} from "../../actions/profileAction"
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -9,12 +9,14 @@ const ProfilePage = ({
    profile,
    match,
    history,
-   getProfileByID
+   getProfile
 
 }) => {
    useEffect(() => {
-      getProfileByID(match.params.id);
-   }, [match, getProfileByID]);
+      getProfile(match.Object); 
+      [match, getProfile]
+      
+   })
 
    const handleEdit = () => {
       history.push(`/blog/put/editProfile/`);
@@ -38,11 +40,11 @@ const mapStateToProps = state => ({
 ProfilePage.propTypes = {
    auth: PropTypes.bool.isRequired,
    profile: PropTypes.object.isRequired,
-   getProfileByID: PropTypes.func.isRequired,
+   getProfile: PropTypes.func.isRequired,
 };
 
 export default connect(
    mapStateToProps,{
-      getProfileByID
+      getProfile
    }
 )(ProfilePage);

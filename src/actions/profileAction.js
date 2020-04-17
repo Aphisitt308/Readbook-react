@@ -1,8 +1,7 @@
 import axios from "axios";
 import {
    EDIT_PROFILE,
-   TOGGLE_PROFILE_LOADING,
-   GET_PROFILE
+   TOGGLE_PROFILE_LOADING
   
 } from "./types";
 
@@ -27,27 +26,24 @@ import { setErrors } from "./errorActions";
 //    history.push(`/Profile`);
 // }
 
-export const getProfileByID = id => dispatch => {
-   dispatch(toggleProfileLoading());
-   axios
-      .get(`/api/get/Profile/${id}`)
-      .then(res => {
-         dispatch({
-            type: GET_PROFILE,
-            payload: res.data
-         });
-         dispatch(toggleProfileLoading());
-      })
-      .catch(err => {
-         dispatch(setErrors(err.response.data));
-         dispatch(toggleProfileLoading());
-      });
-};
+
+export const getProfile = user => {
+    axios.get('users/Profile', {
+      headers: { Autherization: `Bearer ${localStorage.getItem('jwtToken')}`}
+     })
+     .then(response => {
+       console.log(response)
+       return response.data
+     })
+     .catch(err => {
+       console.log(err)
+     })
+ }
 export const updateProfile = (  userData ,history) => dispatch => {
    dispatch(toggleProfileLoading());
    
    axios
-      .put(`/api/posts/editProfile/`, userData)
+      .put('/api/posts/editProfile/', userData)
       .then(res => {
          dispatch({
             type: EDIT_PROFILE,

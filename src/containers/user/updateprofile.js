@@ -4,14 +4,14 @@ import ProfileForm from "../../components/user/profileform";
 import Validate from "../../components/form/Validate";
 import { connect } from "react-redux";
 // import { getPostByID, updatePost } from "../../actions/postActions";
-import {updateProfile,getProfileByID} from "../../actions/profileAction"
+import {updateProfile,getProfile} from "../../actions/profileAction"
 
 const UpdateProfilePage = ({
    errors,
    updateProfile,
    loading,
    currentProfile,
-   getProfileByID,
+   getProfile,
    match,
    history
 }) => {
@@ -21,11 +21,10 @@ const UpdateProfilePage = ({
       errors: {}
    });
 
-   // updating the local state of post with the received post data
    useEffect(() =>{
-      getProfileByID(match.params.id);
+      getProfile(match.Profile);
 
-   },[match, getProfileByID]);
+   },[match, getProfile]);
 
    useEffect(() => {
       setProfile(Profile => ({
@@ -92,5 +91,5 @@ UpdateProfilePage.propTypes = {
 
 export default connect(
    mapStateToProps,
-   { getProfileByID, updateProfile }
+   { getProfile, updateProfile }
 )(UpdateProfilePage);
