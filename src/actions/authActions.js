@@ -7,7 +7,7 @@ import { resetPost } from "./postActions";
 import { setErrors } from "./errorActions";
 
 export const registerUser = (userData, history) => dispatch => {
-   // dispatch(toggleUserLoading());
+   dispatch(toggleUserLoading());
    axios
       .post("/api/users/signup", userData)
       .then(res => {
@@ -25,7 +25,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 export const loginUser = userData => dispatch => {
-   // dispatch(toggleUserLoading());
+   dispatch(toggleUserLoading());
    axios
       .post("/api/users/login", userData)
       .then(res => {
